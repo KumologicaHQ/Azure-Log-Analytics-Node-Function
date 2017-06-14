@@ -30,11 +30,9 @@ module.exports = function (context, req) {
     var headers = {
         "content-type": "application/json", 
         "Accept": "application/json",
-        "x-ms-date": processingDate
+        "x-ms-date": processingDate,
+        "Authorization": authorization
     };
-
-    // add authorization signature from step one
-    headers.Authorization = authorization;
 
     // add Log-Type and (optionally) Time-Generated
     if( req.body.type != undefined ) {
