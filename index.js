@@ -13,7 +13,6 @@ module.exports = function (context, req) {
     var apiVersion = '2016-04-01';
     var processingDate = new Date().toUTCString();
 
-
     // *****************************************************
     // step one - build authorization signature
 
@@ -22,9 +21,8 @@ module.exports = function (context, req) {
     var authorization = 'POST\n' + contentLength + '\napplication/json\nx-ms-date:' + processingDate + '\n/api/logs';
 
     // encode string using Base64(HMAC-SHA256(UTF8(StringToSign)))
-    authorization = crypto.createHmac('sha256', sharedKey).update(authorization.toString('utf8')).digest('base64');
-
-    var authorization = 'Authorization: SharedKey ' + workspaceId + ':' + authorization;
+    authorization = crypto.createHmac('sha256', new Buffer(sharedKey, 'base64')).update(authorization, 'utf-8').digest('base64');
+    authorization = 'SharedKey ' + workspaceId + ':' + authorization;
     
     // *****************************************************
     // step two - build request headers
