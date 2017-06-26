@@ -12,7 +12,7 @@ https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-collecto
 None, request and crypto are default node.js libraries.
 
 ## Execution
-The Function expects a body that looks like this:
+Make a POST to the Azure Function URL with a body that follows this signature:
 
 ```
 {
