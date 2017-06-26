@@ -8,16 +8,19 @@ https://docs.microsoft.com/en-us/azure/log-analytics/log-analytics-data-collecto
 ## Installation
 1. Create a new Azure Function of type "HttpTrigger-JavaScript" and paste the code from index.js in this repository into the index.js in the Function, overwriting everything that is in the default Function template.
 
-2. Replace the workspaceId and sharedKey variables at the top with values from your Azure Log Analytics instance
+### Dependencies
+None, request and crypto are default node.js libraries.
 
 ## Execution
 The Function expects a body that looks like this:
 
 ```
 {
-  "type": "<insert log type here>",
-  "log-entry: { <JSON object that you want to write to the Azure Log Analysis service> }
+"type":"<Log-Type>",
+"credentials":{
+  "workspaceId":"xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+  "sharedKey":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+},
+"logEntry": <JSON object or array of JSON objects>
 }
 ```
-
-Optionally you can include a "time-generated" property if you'd like the Log Analysis Service to use a set time instead of the time that is auto-generated on their server.
